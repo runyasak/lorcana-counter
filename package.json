@@ -1,0 +1,21 @@
+{
+  "name": "lorcana-counter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "nuxt": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "latest",
+    "@tailwindcss/vite": "latest",
+    "eslint": "latest",
+    "tailwindcss": "latest"
+  }
+}
