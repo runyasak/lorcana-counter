@@ -17,5 +17,6 @@
     "@tailwindcss/vite": "latest",
     "eslint": "latest",
     "tailwindcss": "latest"
-  }
+  },
+  "packageManager": "pnpm@10.33.2"
 }
