@@ -10,6 +10,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/fonts": "^0.14.0",
     "nuxt": "latest"
   },
   "devDependencies": {
