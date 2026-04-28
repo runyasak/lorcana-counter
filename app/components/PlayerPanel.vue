@@ -19,7 +19,8 @@ const emit = defineEmits<{
       </div>
       <div class="absolute left-[5dvw] top-[calc(50%-2rem)]">
         <button
-          class="size-16 rounded-full flex items-center justify-center text-[28px] font-light shrink-0 leading-none pointer-events-none">
+          class="size-16 rounded-full flex items-center justify-center text-[28px] font-light shrink-0 leading-none pointer-events-none"
+          :style="{ color: fg }">
           −
         </button>
       </div>
@@ -32,7 +33,8 @@ const emit = defineEmits<{
 
       <div class="absolute right-[5dvw] top-[calc(50%-2rem)]">
         <button
-          class="size-16 rounded-full flex items-center justify-center text-[28px] font-light shrink-0 leading-none pointer-events-none">
+          class="size-16 rounded-full flex items-center justify-center text-[28px] font-light shrink-0 leading-none pointer-events-none"
+          :style="{ color: fg }">
           +
         </button>
       </div>
