@@ -29,29 +29,41 @@ function reset() {
 </script>
 
 <template>
-  <div class="w-full h-dvh overflow-hidden flex flex-col relative font-sans">
+  <div class="relative flex h-dvh w-full flex-col overflow-hidden font-sans">
     <!-- Player 1 — dark, flipped toward opponent -->
-    <div class="bg-[#f5f5f5] flex-1">
-      <div class="bg-[#111111] h-full min-h-0 rounded-bl-[20dvw] overflow-hidden">
-        <PlayerPanel :lore="lores[0]" fg="#ffffff" fg-muted="rgba(255,255,255,0.22)" :flipped="true"
-          @change="change(0, $event)" />
+    <div class="flex-1 bg-[#f5f5f5]">
+      <div class="h-full min-h-0 overflow-hidden rounded-bl-[20dvw] bg-[#111111]">
+        <PlayerPanel
+          :lore="lores[0]"
+          fg="#ffffff"
+          fg-muted="rgba(255,255,255,0.22)"
+          :flipped="true"
+          @change="change(0, $event)"
+        />
       </div>
     </div>
 
     <!-- Player 2 — light, normal orientation -->
-    <div class="bg-[#111111] flex-1">
-      <div class="flex-1 min-h-0 h-full bg-[#f5f5f5] rounded-tr-[20dvw] overflow-hidden relative z-[2]">
-        <PlayerPanel :lore="lores[1]" fg="#111111" fg-muted="rgba(0,0,0,0.2)" :flipped="false"
-          @change="change(1, $event)" />
+    <div class="flex-1 bg-[#111111]">
+      <div class="relative z-[2] h-full min-h-0 flex-1 overflow-hidden rounded-tr-[20dvw] bg-[#f5f5f5]">
+        <PlayerPanel
+          :lore="lores[1]"
+          fg="#111111"
+          fg-muted="rgba(0,0,0,0.2)"
+          :flipped="false"
+          @change="change(1, $event)"
+        />
 
         <button
-          class="absolute bottom-7 right-6 z-20 rounded-full px-[18px] py-[7px] text-[11px] font-bold tracking-[0.12em] uppercase cursor-pointer"
+          class="absolute right-6 bottom-7 z-20 cursor-pointer rounded-full px-[18px] py-[7px] text-[11px] font-bold tracking-[0.12em] uppercase"
           :style="{
             borderWidth: '1.5px',
             borderStyle: 'solid',
             borderColor: 'rgba(0,0,0,0.18)',
             color: 'rgba(0,0,0,0.38)',
-          }" @click="reset">
+          }"
+          @click="reset"
+        >
           Reset
         </button>
       </div>

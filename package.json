@@ -7,7 +7,8 @@
     "build": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.14.0",
@@ -17,8 +18,14 @@
     "@nuxt/eslint": "latest",
     "@tailwindcss/vite": "latest",
     "eslint": "latest",
+    "eslint-plugin-tailwindcss": "^3.18.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "tailwindcss": "latest",
     "typescript": "^6.0.3"
+  },
+  "lint-staged": {
+    "*.{vue,ts,js,mjs}": "eslint --fix"
   },
   "packageManager": "pnpm@10.33.2"
 }
