@@ -62,7 +62,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 
     <!-- Hamburger -->
     <button
-      class="absolute top-4 right-4 z-20 p-2 opacity-40 transition-opacity hover:opacity-100"
+      class="absolute top-4 right-4 z-20 hidden p-2 opacity-40 transition-opacity hover:opacity-100"
       :style="{ color: theme.fg }"
       @click="settingsOpen = true"
     >
