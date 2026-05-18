@@ -1,25 +1,50 @@
 <script setup lang="ts">
+import type { Theme } from '~/utils/themes'
+
 const MIN_LORE = 0
 const MAX_LORE = 20
 
 const lores = ref<[number, number]>([0, 0])
+const themeIndices = ref<[number, number]>([0, 1])
 
-onMounted(() => {
+const p1Theme = computed<Theme>(() => THEMES[themeIndices.value[0]] ?? THEMES[0]!)
+const p2Theme = computed<Theme>(() => THEMES[themeIndices.value[1]] ?? THEMES[1]!)
+
+const { request: requestWakeLock, startIosFallback } = useWakeLock()
+let iosFallbackStarted = false
+
+onMounted(async () => {
   const raw = localStorage.getItem('lorcana')
 
-  if (!raw) {
-    return
+  if (raw) {
+    const saved = JSON.parse(raw)
+
+    if (Array.isArray(saved) && saved.length === 2) {
+      lores.value = saved as [number, number]
+    } else if (saved?.lores && saved?.themes) {
+      lores.value = saved.lores as [number, number]
+      themeIndices.value = saved.themes as [number, number]
+    }
   }
 
-  const saved = JSON.parse(raw)
-  if (Array.isArray(saved) && saved.length === 2) {
-    lores.value = saved as [number, number]
-  }
+  await requestWakeLock()
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      requestWakeLock()
+    }
+  })
 })
 
-watch(lores, val => localStorage.setItem('lorcana', JSON.stringify(val)), { deep: true })
+watch([lores, themeIndices], ([l, t]) => {
+  localStorage.setItem('lorcana', JSON.stringify({ lores: l, themes: t }))
+}, { deep: true })
 
 function change(idx: 0 | 1, amount: number) {
+  if (!iosFallbackStarted) {
+    startIosFallback()
+    iosFallbackStarted = true
+  }
   lores.value[idx] = Math.min(MAX_LORE, Math.max(MIN_LORE, lores.value[idx] + amount))
 }
 
@@ -30,28 +55,40 @@ function reset() {
 
 <template>
   <div class="relative flex h-dvh w-full flex-col overflow-hidden font-sans">
-    <!-- Player 1 — dark, flipped toward opponent -->
-    <div class="flex-1 bg-[#f5f5f5]">
-      <div class="h-full min-h-0 overflow-hidden rounded-bl-[20dvw] bg-[#111111]">
+    <!-- Player 1 — flipped toward opponent -->
+    <div
+      class="flex-1"
+      :style="{ background: p2Theme.bg }"
+    >
+      <div
+        class="h-full min-h-0 overflow-hidden rounded-bl-[20dvw]"
+        :style="{ background: p1Theme.bg }"
+      >
         <PlayerPanel
           :lore="lores[0]"
-          fg="#ffffff"
-          fg-muted="rgba(255,255,255,0.22)"
+          :theme-index="themeIndices[0]"
           :flipped="true"
           @change="change(0, $event)"
+          @update:theme-index="(v: number) => (themeIndices[0] = v)"
         />
       </div>
     </div>
 
-    <!-- Player 2 — light, normal orientation -->
-    <div class="flex-1 bg-[#111111]">
-      <div class="relative z-[2] h-full min-h-0 flex-1 overflow-hidden rounded-tr-[20dvw] bg-[#f5f5f5]">
+    <!-- Player 2 — normal orientation -->
+    <div
+      class="flex-1"
+      :style="{ background: p1Theme.bg }"
+    >
+      <div
+        class="relative z-[2] h-full min-h-0 flex-1 overflow-hidden rounded-tr-[20dvw]"
+        :style="{ background: p2Theme.bg }"
+      >
         <PlayerPanel
           :lore="lores[1]"
-          fg="#111111"
-          fg-muted="rgba(0,0,0,0.2)"
+          :theme-index="themeIndices[1]"
           :flipped="false"
           @change="change(1, $event)"
+          @update:theme-index="(v: number) => (themeIndices[1] = v)"
         />
 
         <button
@@ -59,8 +96,8 @@ function reset() {
           :style="{
             borderWidth: '1.5px',
             borderStyle: 'solid',
-            borderColor: 'rgba(0,0,0,0.18)',
-            color: 'rgba(0,0,0,0.38)',
+            borderColor: p2Theme.fgMuted,
+            color: p2Theme.fgMuted,
           }"
           @click="reset"
         >
