@@ -19,7 +19,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 
 <template>
   <div
-    class="relative h-full w-full"
+    class="relative h-full w-full rounded-xl border border-slate-800"
     :style="{ transform: flipped ? 'rotate(180deg)' : 'none' }"
   >
     <!-- Click areas + score -->
@@ -40,7 +40,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 
       <div
         class="pointer-events-none min-w-40 text-center leading-none font-bold tracking-wide tabular-nums"
-        :style="{ color: theme.fg, fontSize: 'clamp(120px, 42vw, 180px)' }"
+        :style="{ color: theme.fg, fontSize: 'clamp(120px, 30vw, 180px)' }"
       >
         {{ lore }}
       </div>

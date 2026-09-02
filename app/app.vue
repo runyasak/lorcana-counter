@@ -8,7 +8,7 @@ const lores = ref<[number, number]>([0, 0])
 const themeIndices = ref<[number, number]>([0, 1])
 
 const p1Theme = computed<Theme>(() => THEMES[themeIndices.value[0]] ?? THEMES[0]!)
-const p2Theme = computed<Theme>(() => THEMES[themeIndices.value[1]] ?? THEMES[1]!)
+const p2Theme = computed<Theme>(() => THEMES[themeIndices.value[1]] ?? THEMES[0]!)
 
 const { request: requestWakeLock, startIosFallback } = useWakeLock()
 let iosFallbackStarted = false
@@ -61,8 +61,7 @@ function reset() {
       :style="{ background: p2Theme.bg }"
     >
       <div
-        class="h-full min-h-0 overflow-hidden rounded-bl-[20dvw]"
-        :style="{ background: p1Theme.bg }"
+        class="h-full min-h-0 overflow-hidden bg-slate-950 px-4 py-2"
       >
         <PlayerPanel
           :lore="lores[0]"
@@ -74,14 +73,24 @@ function reset() {
       </div>
     </div>
 
+    <button
+      class="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-white bg-slate-950 px-4.5 py-1 text-[11px] font-bold tracking-[0.12em] text-white uppercase"
+      :style="{
+        borderWidth: '1.5px',
+        borderStyle: 'solid',
+      }"
+      @click="reset"
+    >
+      Reset
+    </button>
+
     <!-- Player 2 — normal orientation -->
     <div
       class="flex-1"
       :style="{ background: p1Theme.bg }"
     >
       <div
-        class="relative z-[2] h-full min-h-0 flex-1 overflow-hidden rounded-tr-[20dvw]"
-        :style="{ background: p2Theme.bg }"
+        class="relative z-2 h-full min-h-0 flex-1 overflow-hidden bg-slate-950 px-4 py-2"
       >
         <PlayerPanel
           :lore="lores[1]"
@@ -90,19 +99,6 @@ function reset() {
           @change="change(1, $event)"
           @update:theme-index="(v: number) => (themeIndices[1] = v)"
         />
-
-        <button
-          class="absolute right-6 bottom-7 z-20 cursor-pointer rounded-full px-[18px] py-[7px] text-[11px] font-bold tracking-[0.12em] uppercase"
-          :style="{
-            borderWidth: '1.5px',
-            borderStyle: 'solid',
-            borderColor: p2Theme.fgMuted,
-            color: p2Theme.fgMuted,
-          }"
-          @click="reset"
-        >
-          Reset
-        </button>
       </div>
     </div>
   </div>
