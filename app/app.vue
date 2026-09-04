@@ -2,7 +2,7 @@
 import type { Theme } from '~/utils/themes'
 
 const MIN_LORE = 0
-const MAX_LORE = 20
+const MAX_LORE = 99
 
 const lores = ref<[number, number]>([0, 0])
 const diffs = ref<[number, number]>([0, 0])

@@ -15,9 +15,12 @@ const emit = defineEmits<{
   'update:themeIndex': [index: number]
 }>()
 
+const WIN_LORE = 20
+
 const settingsOpen = ref(false)
 
 const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
+const hasCrown = computed(() => props.lore >= WIN_LORE)
 </script>
 
 <template>
@@ -50,11 +53,18 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
         </div>
       </div>
 
-      <div
-        class="pointer-events-none min-w-40 text-center leading-none font-bold tracking-wide tabular-nums"
-        :style="{ color: theme.fg, fontSize: 'clamp(120px, 30vw, 180px)' }"
-      >
-        <NumberFlow :value="lore" />
+      <div class="relative">
+        <Icon
+          v-if="hasCrown"
+          name="akar-icons:crown"
+          class="tada pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 text-[8vw] text-yellow-400"
+        />
+        <div
+          class="pointer-events-none min-w-40 text-center leading-none font-bold tracking-wide tabular-nums"
+          :style="{ color: theme.fg, fontSize: 'clamp(120px, 30vw, 180px)' }"
+        >
+          <NumberFlow :value="lore" />
+        </div>
       </div>
 
       <div class="absolute top-[calc(50%-2rem)] right-[5dvw]">
@@ -221,5 +231,37 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 
 .bounce-in {
   animation: bounceIn 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes tada {
+  0% {
+    transform: translateX(-50%) scale3d(1, 1, 1);
+  }
+
+  10%,
+  20% {
+    transform: translateX(-50%) scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-50%) scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%,
+  60%,
+  80% {
+    transform: translateX(-50%) scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  100% {
+    transform: translateX(-50%) scale3d(1, 1, 1);
+  }
+}
+
+.tada {
+  animation: tada 1s;
 }
 </style>

@@ -8,7 +8,7 @@ export default withNuxt(
     settings: {
       tailwindcss: {
         cssFiles: ['./app/assets/css/main.css'],
-        whitelist: ['bounce-in'],
+        whitelist: ['bounce-in', 'tada'],
       },
     },
   },
