@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Theme } from '~/utils/themes'
+import NumberFlow from '@number-flow/vue'
 
 const props = defineProps<{
   lore: number
@@ -42,7 +43,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
         class="pointer-events-none min-w-40 text-center leading-none font-bold tracking-wide tabular-nums"
         :style="{ color: theme.fg, fontSize: 'clamp(120px, 30vw, 180px)' }"
       >
-        {{ lore }}
+        <NumberFlow :value="lore" />
       </div>
 
       <div class="absolute top-[calc(50%-2rem)] right-[5dvw]">
