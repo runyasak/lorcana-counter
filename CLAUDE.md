@@ -10,18 +10,20 @@ Single-page static Lorcana lore counter — tracks 2 players racing to 20 lore.
 
 ## Commands
 ```sh
-pnpm dev          # dev server → http://localhost:3000
-pnpm build        # nuxt generate → .output/public/
-pnpm preview      # preview static output
-pnpm lint         # eslint .
-pnpm lint:fix     # eslint . --fix
+vp run dev        # dev server → http://localhost:3000
+vp run build       # nuxt generate → .output/public/
+vp run preview     # preview static output
+vp lint             # eslint .
+vp lint --fix       # eslint . --fix
 ```
 
 ## First-time setup
 ```sh
-pnpm install
-pnpm exec nuxt prepare   # generates .nuxt/ — required before linting
+vp install
+vp exec nuxt prepare   # generates .nuxt/ — required before linting
 ```
+
+Uses Vite+ (`vp`) as of 2026-09-04 — previously this standalone repo used raw `pnpm` directly; switched to match the vault-wide convention. `packageManager: pnpm@10.33.2` in `package.json` and the `pnpm`-based husky pre-commit hook (`vp exec lint-staged`) still resolve through vp's bundled pnpm/node, no system-wide Node install required.
 
 ## Key decisions
 - localStorage key `lorcana` persists player names + scores across refreshes
