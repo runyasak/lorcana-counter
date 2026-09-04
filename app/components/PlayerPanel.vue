@@ -46,7 +46,8 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <span
             v-if="diff < 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-16 left-1/4 -translate-x-1/4 text-[10vw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-full left-1/4 -translate-x-1/4 text-[10vw] font-bold text-white/50"
+            :style="{ fontSize: 'clamp(40px, 10vw, 60px)' }"
           >
             {{ diff }}
           </span>
@@ -78,7 +79,8 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <span
             v-if="diff > 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-16 left-1/4 -translate-x-1/4 text-[10vw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-full left-1/2 -translate-x-1/2 text-[10vw] font-bold text-white/50"
+            :style="{ fontSize: 'clamp(40px, 10vw, 60px)' }"
           >
             +{{ diff }}
           </span>
