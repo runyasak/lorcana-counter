@@ -5,6 +5,7 @@ const MIN_LORE = 0
 const MAX_LORE = 20
 
 const lores = ref<[number, number]>([0, 0])
+const diffs = ref<[number, number]>([0, 0])
 const themeIndices = ref<[number, number]>([0, 1])
 
 const p1Theme = computed<Theme>(() => THEMES[themeIndices.value[0]] ?? THEMES[0]!)
@@ -45,17 +46,29 @@ function change(idx: 0 | 1, amount: number) {
     startIosFallback()
     iosFallbackStarted = true
   }
-  lores.value[idx] = Math.min(MAX_LORE, Math.max(MIN_LORE, lores.value[idx] + amount))
+
+  const before = lores.value[idx]
+  const after = Math.min(MAX_LORE, Math.max(MIN_LORE, before + amount))
+  lores.value[idx] = after
+
+  const realized = after - before
+  if (realized !== 0) {
+    diffs.value[idx] += realized
+    if (realized > 0) {
+      diffs.value[idx === 0 ? 1 : 0] = 0
+    }
+  }
 }
 
 function reset() {
   lores.value = [0, 0]
+  diffs.value = [0, 0]
 }
 </script>
 
 <template>
   <div class="relative flex h-dvh w-full flex-col overflow-hidden font-sans">
-    <!-- Player 1 — flipped toward opponent -->
+    <!-- Player 2 — flipped toward opponent -->
     <div
       class="flex-1"
       :style="{ background: p2Theme.bg }"
@@ -65,8 +78,10 @@ function reset() {
       >
         <PlayerPanel
           :lore="lores[0]"
+          :diff="diffs[0]"
           :theme-index="themeIndices[0]"
           :flipped="true"
+          border-color="#b39aff"
           @change="change(0, $event)"
           @update:theme-index="(v: number) => (themeIndices[0] = v)"
         />
@@ -84,7 +99,7 @@ function reset() {
       Reset
     </button>
 
-    <!-- Player 2 — normal orientation -->
+    <!-- Player 1 — normal orientation -->
     <div
       class="flex-1"
       :style="{ background: p1Theme.bg }"
@@ -94,8 +109,10 @@ function reset() {
       >
         <PlayerPanel
           :lore="lores[1]"
+          :diff="diffs[1]"
           :theme-index="themeIndices[1]"
           :flipped="false"
+          border-color="#00dc82"
           @change="change(1, $event)"
           @update:theme-index="(v: number) => (themeIndices[1] = v)"
         />

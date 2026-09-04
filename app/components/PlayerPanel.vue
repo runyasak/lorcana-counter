@@ -4,8 +4,10 @@ import NumberFlow from '@number-flow/vue'
 
 const props = defineProps<{
   lore: number
+  diff: number
   themeIndex: number
   flipped: boolean
+  borderColor: string
 }>()
 
 const emit = defineEmits<{
@@ -20,8 +22,8 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 
 <template>
   <div
-    class="relative h-full w-full rounded-xl border border-slate-800"
-    :style="{ transform: flipped ? 'rotate(180deg)' : 'none' }"
+    class="relative h-full w-full rounded-xl border"
+    :style="{ transform: flipped ? 'rotate(180deg)' : 'none', borderColor }"
   >
     <!-- Click areas + score -->
     <div class="flex h-full flex-1 items-center justify-center">
@@ -31,12 +33,21 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
       />
 
       <div class="absolute top-[calc(50%-2rem)] left-[5dvw]">
-        <button
-          class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
-          :style="{ color: theme.fg }"
-        >
-          −
-        </button>
+        <div class="relative">
+          <button
+            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
+            :style="{ color: theme.fg }"
+          >
+            −
+          </button>
+          <span
+            v-if="diff < 0"
+            :key="diff"
+            class="bounce-in pointer-events-none absolute -top-16 left-2 text-[10vw] font-bold text-white/50"
+          >
+            {{ diff }}
+          </span>
+        </div>
       </div>
 
       <div
@@ -47,12 +58,21 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
       </div>
 
       <div class="absolute top-[calc(50%-2rem)] right-[5dvw]">
-        <button
-          class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
-          :style="{ color: theme.fg }"
-        >
-          +
-        </button>
+        <div class="relative">
+          <button
+            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
+            :style="{ color: theme.fg }"
+          >
+            +
+          </button>
+          <span
+            v-if="diff > 0"
+            :key="diff"
+            class="bounce-in pointer-events-none absolute -top-16 -left-2 text-[10vw] font-bold text-white/50"
+          >
+            +{{ diff }}
+          </span>
+        </div>
       </div>
 
       <div
@@ -168,5 +188,38 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 </style>
