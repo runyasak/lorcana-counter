@@ -27,4 +27,10 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  fonts: {
+    families: [
+      { name: 'Space Grotesk', provider: 'google', weights: [300, 400, 700] },
+    ],
+  },
 })
