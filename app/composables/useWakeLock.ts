@@ -1,19 +1,20 @@
-const hasNativeApi = typeof navigator !== 'undefined' && 'wakeLock' in navigator
+import { useWakeLock as useVueUseWakeLock } from '@vueuse/core'
 
 export function useWakeLock() {
-  let sentinel: WakeLockSentinel | null = null
+  const { isSupported, request: requestNative } = useVueUseWakeLock()
+
   let audioCtx: AudioContext | null = null
 
   async function request(): Promise<void> {
-    if (!hasNativeApi) return
+    if (!isSupported.value) return
     try {
-      sentinel = await navigator.wakeLock.request('screen')
+      await requestNative('screen')
     } catch { /* permission denied or API unavailable */ }
   }
 
   // iOS < 16.4 fallback: silent AudioContext oscillator — must be called from a user gesture
   function startIosFallback(): void {
-    if (hasNativeApi || audioCtx) return
+    if (isSupported.value || audioCtx) return
     try {
       const Ctx = (window as { AudioContext?: typeof AudioContext, webkitAudioContext?: typeof AudioContext }).AudioContext
         ?? (window as { AudioContext?: typeof AudioContext, webkitAudioContext?: typeof AudioContext }).webkitAudioContext
@@ -29,8 +30,6 @@ export function useWakeLock() {
   }
 
   function release(): void {
-    sentinel?.release().catch(() => {})
-    sentinel = null
     audioCtx?.close().catch(() => {})
     audioCtx = null
   }

@@ -29,12 +29,6 @@ onMounted(async () => {
   }
 
   await requestWakeLock()
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      requestWakeLock()
-    }
-  })
 })
 
 watch([lores, themeIndices], ([l, t]) => {
