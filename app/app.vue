@@ -61,13 +61,13 @@ function reset() {
 </script>
 
 <template>
-  <div class="relative flex min-h-dvh w-full items-center justify-center overflow-hidden bg-slate-950 sm:p-8">
+  <div class="relative flex min-h-dvh w-full items-center justify-center overflow-hidden bg-slate-950">
     <!-- Ambient stage glow — picks up each player's accent color, only visible once the frame is contained -->
     <div class="pointer-events-none absolute top-0 left-0 hidden size-[55vw] -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#b39aff]/10 blur-[100px] sm:block" />
     <div class="pointer-events-none absolute right-0 bottom-0 hidden size-[55vw] translate-x-1/3 translate-y-1/3 rounded-full bg-[#00dc82]/10 blur-[100px] sm:block" />
 
     <div
-      class="relative flex h-dvh w-full max-w-md flex-col overflow-hidden font-sans sm:aspect-[9/19.5] sm:h-auto sm:max-h-[85dvh] sm:rounded-[2.5rem] sm:shadow-2xl sm:ring-1 sm:ring-white/10"
+      class="relative flex h-dvh w-full flex-col overflow-hidden font-sans"
       :style="{ containerType: 'inline-size' }"
     >
       <!-- Player 2 — flipped toward opponent -->

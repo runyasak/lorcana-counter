@@ -35,10 +35,10 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
         @click="emit('change', -1)"
       />
 
-      <div class="absolute top-[calc(50%-2rem)] left-[5cqw]">
+      <div class="absolute top-[calc(50%-2rem)] left-[8cqw] lg:top-[calc(50%-2.5rem)]">
         <div class="relative">
           <button
-            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
+            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-6xl leading-none font-light lg:size-20"
             :style="{ color: theme.fg }"
           >
             −
@@ -59,7 +59,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <Icon
             v-if="hasCrown"
             name="akar-icons:crown"
-            class="tada text-[10cqw] text-yellow-400"
+            class="tada text-[10cqw] text-yellow-400 lg:text-[5cqw]"
           />
         </div>
         <div
@@ -70,10 +70,10 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
         </div>
       </div>
 
-      <div class="absolute top-[calc(50%-2rem)] right-[5cqw]">
+      <div class="absolute top-[calc(50%-2rem)] right-[8cqw] lg:top-[calc(50%-2.5rem)]">
         <div class="relative">
           <button
-            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-[28px] leading-none font-light"
+            class="pointer-events-none flex size-16 shrink-0 items-center justify-center rounded-full text-6xl leading-none font-light lg:size-20"
             :style="{ color: theme.fg }"
           >
             +
