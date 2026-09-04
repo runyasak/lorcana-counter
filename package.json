@@ -25,7 +25,8 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "tailwindcss": "latest",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.129.0"
   },
   "lint-staged": {
     "*.{vue,ts,js,mjs}": "eslint --fix"
