@@ -43,7 +43,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
           <span
             v-if="diff < 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-16 left-2 text-[10vw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-16 left-1/4 -translate-x-1/4 text-[10vw] font-bold text-white/50"
           >
             {{ diff }}
           </span>
@@ -68,7 +68,7 @@ const theme = computed<Theme>(() => THEMES[props.themeIndex] ?? THEMES[0]!)
           <span
             v-if="diff > 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-16 -left-2 text-[10vw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-16 left-1/4 -translate-x-1/4 text-[10vw] font-bold text-white/50"
           >
             +{{ diff }}
           </span>
