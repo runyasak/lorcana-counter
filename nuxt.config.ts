@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Lorcana Counter',
       meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
         { name: 'description', content: 'A lore counter web app for Disney Lorcana, built with Nuxt.' },
         { property: 'og:title', content: 'Lorcana Counter' },
         { property: 'og:description', content: 'A lore counter web app for Disney Lorcana, built with Nuxt.' },
