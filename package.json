@@ -1,6 +1,6 @@
 {
   "name": "lorcana-counter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A lore counter web app for Disney Lorcana, built with Nuxt.",
   "private": true,
   "type": "module",

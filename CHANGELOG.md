@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.0.1
+
+[compare changes](https://github.com/runyasak/lorcana-counter/compare/v0.0.0...v0.0.1)
+
+### 🩹 Fixes
+
+- Center negative diff badge and tighten landscape offset ([e1a2402](https://github.com/runyasak/lorcana-counter/commit/e1a2402))
+
+### ❤️ Contributors
+
+- Runyasak Chaengnaimuang ([@runyasak](https://github.com/runyasak))
+
 ## v0.0.0
 
 ### 🚀 Enhancements
