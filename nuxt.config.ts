@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
 
-  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxt/icon', '@vite-pwa/nuxt'],
+  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxt/icon', '@vite-pwa/nuxt', 'nuxt-gtag'],
 
   devtools: { enabled: false },
 
@@ -49,6 +49,10 @@ export default defineNuxtConfig({
     families: [
       { name: 'Space Grotesk', provider: 'google', weights: [300, 400, 700] },
     ],
+  },
+
+  gtag: {
+    id: 'G-89L4XZP62C',
   },
 
   pwa: {
