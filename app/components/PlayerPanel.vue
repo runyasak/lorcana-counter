@@ -46,7 +46,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <span
             v-if="diff < 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-full left-1/4 -translate-x-1/4 text-[10cqw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-full left-1/4 -translate-x-1/4 text-[10cqw] font-bold text-white/50 landscape:-top-1/2"
             :style="{ fontSize: 'clamp(20px, min(10cqw, 15cqh), 60px)' }"
           >
             {{ diff }}
@@ -55,11 +55,11 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
       </div>
 
       <div class="relative">
-        <div class="pointer-events-none absolute inset-x-0 -top-[20%] flex justify-center">
+        <div class="pointer-events-none absolute inset-x-0 top-[-5%] flex justify-center">
           <Icon
             v-if="hasCrown"
             name="akar-icons:crown"
-            class="tada text-[min(10cqw,15cqh)] text-yellow-400 lg:text-[min(5cqw,8cqh)]"
+            class="tada crown-size text-yellow-400"
           />
         </div>
         <div
@@ -81,7 +81,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <span
             v-if="diff > 0"
             :key="diff"
-            class="bounce-in pointer-events-none absolute -top-full left-1/2 -translate-x-1/2 text-[10cqw] font-bold text-white/50"
+            class="bounce-in pointer-events-none absolute -top-full left-1/2 -translate-x-1/2 text-[10cqw] font-bold text-white/50 landscape:-top-1/2"
             :style="{ fontSize: 'clamp(20px, min(10cqw, 15cqh), 60px)' }"
           >
             +{{ diff }}
@@ -194,6 +194,16 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
 </template>
 
 <style scoped>
+.crown-size {
+  font-size: min(10cqw, 15cqh);
+}
+
+/* @media (min-width: 1024px) {
+  .crown-size {
+    font-size: min(5cqw, 8cqh);
+  }
+} */
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;
