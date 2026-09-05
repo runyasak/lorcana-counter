@@ -8,6 +8,19 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
+    head: {
+      title: 'Lorcana Counter',
+      meta: [
+        { name: 'description', content: 'A lore counter web app for Disney Lorcana, built with Nuxt.' },
+        { property: 'og:title', content: 'Lorcana Counter' },
+        { property: 'og:description', content: 'A lore counter web app for Disney Lorcana, built with Nuxt.' },
+        { property: 'og:type', content: 'website' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: 'icon.svg' },
+        { rel: 'apple-touch-icon', href: 'icon.svg' },
+      ],
+    },
   },
 
   css: ['~/assets/css/main.css'],
