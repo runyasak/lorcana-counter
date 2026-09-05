@@ -3,6 +3,23 @@
   "description": "A lore counter web app for Disney Lorcana, built with Nuxt.",
   "private": true,
   "type": "module",
+  "license": "MIT",
+  "author": "Runyasak Chaengnaimuang",
+  "homepage": "https://github.com/runyasak/lorcana-counter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runyasak/lorcana-counter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/runyasak/lorcana-counter/issues"
+  },
+  "keywords": [
+    "lorcana",
+    "disney-lorcana",
+    "lore-counter",
+    "nuxt",
+    "pwa"
+  ],
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt generate",
