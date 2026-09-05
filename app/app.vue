@@ -11,8 +11,7 @@ const themeIndices = ref<[number, number]>([0, 1])
 const p1Theme = computed<Theme>(() => THEMES[themeIndices.value[0]] ?? THEMES[0]!)
 const p2Theme = computed<Theme>(() => THEMES[themeIndices.value[1]] ?? THEMES[0]!)
 
-const { request: requestWakeLock, startIosFallback } = useWakeLock()
-let iosFallbackStarted = false
+const { request: requestWakeLock, startAudioFallback } = useWakeLock()
 
 onMounted(async () => {
   const raw = localStorage.getItem('lorcana')
@@ -36,10 +35,10 @@ watch([lores, themeIndices], ([l, t]) => {
 }, { deep: true })
 
 function change(idx: 0 | 1, amount: number) {
-  if (!iosFallbackStarted) {
-    startIosFallback()
-    iosFallbackStarted = true
-  }
+  // No-ops once a native lock is actually active or the fallback has already
+  // started — calling it on every tap lets it recover if Safari drops the
+  // native lock mid-session.
+  startAudioFallback()
 
   const before = lores.value[idx]
   const after = Math.min(MAX_LORE, Math.max(MIN_LORE, before + amount))

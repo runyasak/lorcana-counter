@@ -1,7 +1,7 @@
 import { useWakeLock as useVueUseWakeLock } from '@vueuse/core'
 
 export function useWakeLock() {
-  const { isSupported, request: requestNative } = useVueUseWakeLock()
+  const { isSupported, isActive, request: requestNative } = useVueUseWakeLock()
 
   let audioCtx: AudioContext | null = null
 
@@ -12,9 +12,14 @@ export function useWakeLock() {
     } catch { /* permission denied or API unavailable */ }
   }
 
-  // iOS < 16.4 fallback: silent AudioContext oscillator — must be called from a user gesture
-  function startIosFallback(): void {
-    if (isSupported.value || audioCtx) return
+  // Silent AudioContext oscillator fallback — needed both pre-iOS 16.4 (no
+  // native API) and on Safari versions where the native lock silently fails
+  // or gets dropped despite the API existing (Safari is flakier than
+  // Chromium here, and doesn't always reject the promise when this happens).
+  // Gate on isActive (a lock is actually held right now), not isSupported
+  // (the API merely exists) — must be called from a user gesture.
+  function startAudioFallback(): void {
+    if (isActive.value || audioCtx) return
     try {
       const Ctx = (window as { AudioContext?: typeof AudioContext, webkitAudioContext?: typeof AudioContext }).AudioContext
         ?? (window as { AudioContext?: typeof AudioContext, webkitAudioContext?: typeof AudioContext }).webkitAudioContext
@@ -34,5 +39,5 @@ export function useWakeLock() {
     audioCtx = null
   }
 
-  return { request, release, startIosFallback }
+  return { request, release, startAudioFallback }
 }
