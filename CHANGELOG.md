@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.0.2
+
+[compare changes](https://github.com/runyasak/lorcana-counter/compare/v0.0.1...v0.0.2)
+
+### 🩹 Fixes
+
+- Disable pinch-to-zoom on mobile ([1328f04](https://github.com/runyasak/lorcana-counter/commit/1328f04))
+
+### ❤️ Contributors
+
+- Runyasak Chaengnaimuang ([@runyasak](https://github.com/runyasak))
+
 ## v0.0.1
 
 [compare changes](https://github.com/runyasak/lorcana-counter/compare/v0.0.0...v0.0.1)
