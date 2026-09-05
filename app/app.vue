@@ -66,10 +66,7 @@ function reset() {
     <div class="pointer-events-none absolute top-0 left-0 hidden size-[55vw] -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#b39aff]/10 blur-[100px] sm:block" />
     <div class="pointer-events-none absolute right-0 bottom-0 hidden size-[55vw] translate-x-1/3 translate-y-1/3 rounded-full bg-[#00dc82]/10 blur-[100px] sm:block" />
 
-    <div
-      class="relative flex h-dvh w-full flex-col overflow-hidden font-sans"
-      :style="{ containerType: 'inline-size' }"
-    >
+    <div class="relative flex h-dvh w-full flex-col overflow-hidden font-sans">
       <!-- Player 2 — flipped toward opponent -->
       <div
         class="flex-1"

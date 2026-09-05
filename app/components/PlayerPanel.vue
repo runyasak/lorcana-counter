@@ -26,7 +26,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
 <template>
   <div
     class="relative h-full w-full rounded-xl border"
-    :style="{ transform: flipped ? 'rotate(180deg)' : 'none', borderColor }"
+    :style="{ transform: flipped ? 'rotate(180deg)' : 'none', borderColor, containerType: 'size' }"
   >
     <!-- Click areas + score -->
     <div class="flex h-full flex-1 items-center justify-center">
@@ -47,7 +47,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
             v-if="diff < 0"
             :key="diff"
             class="bounce-in pointer-events-none absolute -top-full left-1/4 -translate-x-1/4 text-[10cqw] font-bold text-white/50"
-            :style="{ fontSize: 'clamp(40px, 10cqw, 60px)' }"
+            :style="{ fontSize: 'clamp(20px, min(10cqw, 15cqh), 60px)' }"
           >
             {{ diff }}
           </span>
@@ -59,12 +59,12 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
           <Icon
             v-if="hasCrown"
             name="akar-icons:crown"
-            class="tada text-[10cqw] text-yellow-400 lg:text-[5cqw]"
+            class="tada text-[min(10cqw,15cqh)] text-yellow-400 lg:text-[min(5cqw,8cqh)]"
           />
         </div>
         <div
           class="pointer-events-none min-w-40 text-center leading-none font-bold tracking-wide tabular-nums"
-          :style="{ color: theme.fg, fontSize: 'clamp(120px, 30cqw, 180px)' }"
+          :style="{ color: theme.fg, fontSize: 'clamp(60px, min(30cqw, 45cqh), 180px)' }"
         >
           <NumberFlow :value="lore" />
         </div>
@@ -82,7 +82,7 @@ const hasCrown = computed(() => props.lore >= WIN_LORE)
             v-if="diff > 0"
             :key="diff"
             class="bounce-in pointer-events-none absolute -top-full left-1/2 -translate-x-1/2 text-[10cqw] font-bold text-white/50"
-            :style="{ fontSize: 'clamp(40px, 10cqw, 60px)' }"
+            :style="{ fontSize: 'clamp(20px, min(10cqw, 15cqh), 60px)' }"
           >
             +{{ diff }}
           </span>
