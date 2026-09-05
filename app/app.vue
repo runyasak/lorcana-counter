@@ -61,6 +61,7 @@ function reset() {
 </script>
 
 <template>
+  <VitePwaManifest />
   <div class="relative flex min-h-dvh w-full items-center justify-center overflow-hidden bg-slate-950">
     <!-- Ambient stage glow — picks up each player's accent color, only visible once the frame is contained -->
     <div class="pointer-events-none absolute top-0 left-0 hidden size-[55vw] -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#b39aff]/10 blur-[100px] sm:block" />

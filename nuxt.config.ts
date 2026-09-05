@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
 
-  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxt/icon'],
+  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxt/icon', '@vite-pwa/nuxt'],
 
   devtools: { enabled: false },
 
@@ -15,10 +15,11 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'Lorcana Counter' },
         { property: 'og:description', content: 'A lore counter web app for Disney Lorcana, built with Nuxt.' },
         { property: 'og:type', content: 'website' },
+        { name: 'theme-color', content: '#0d0d14' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: 'icon.svg' },
-        { rel: 'apple-touch-icon', href: 'icon.svg' },
+        { rel: 'apple-touch-icon', href: 'apple-touch-icon.png' },
       ],
     },
   },
@@ -48,5 +49,26 @@ export default defineNuxtConfig({
     families: [
       { name: 'Space Grotesk', provider: 'google', weights: [300, 400, 700] },
     ],
+  },
+
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Lorcana Counter',
+      short_name: 'Lorcana Counter',
+      description: 'A lore counter web app for Disney Lorcana, built with Nuxt.',
+      theme_color: '#0d0d14',
+      background_color: '#0d0d14',
+      display: 'standalone',
+      start_url: '.',
+      icons: [
+        { src: 'icons/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'icons/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+        { src: 'icons/pwa-maskable-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      ],
+    },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+    },
   },
 })
