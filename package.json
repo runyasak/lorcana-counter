@@ -1,5 +1,6 @@
 {
   "name": "lorcana-counter",
+  "version": "0.0.0",
   "description": "A lore counter web app for Disney Lorcana, built with Nuxt.",
   "private": true,
   "type": "module",
@@ -26,7 +27,8 @@
     "preview": "nuxt preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "bash scripts/release.sh"
   },
   "dependencies": {
     "@number-flow/vue": "^0.5.2",
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@nuxt/eslint": "latest",
     "@tailwindcss/vite": "latest",
+    "changelogen": "^0.6.2",
     "eslint": "latest",
     "eslint-plugin-tailwindcss": "^3.18.3",
     "husky": "^9.1.7",

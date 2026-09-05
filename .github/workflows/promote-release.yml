@@ -1,0 +1,20 @@
+name: Promote release branch
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fast-forward release branch to this tag
+        run: |
+          git push origin HEAD:refs/heads/release --force

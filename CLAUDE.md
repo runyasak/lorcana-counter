@@ -31,6 +31,12 @@ Uses Vite+ (`vp`) as of 2026-09-04 — previously this standalone repo used raw 
 - Reset zeroes both scores
 - No dark mode, no routing, no component library
 
+## Release process
+Deploys are tag-gated, not continuous — pushing to `main` alone deploys nowhere.
+- `pnpm release` (or `vp run release`) runs `scripts/release.sh`: gates on a clean tree, being on `main`, up to date with `origin/main`, and lint+build passing, then runs `changelogen --release` to bump the version, write `CHANGELOG.md`, commit, and tag — all locally. It deliberately does not push; review the result, then `git push --follow-tags` yourself.
+- Pushing a `v*` tag triggers two independent GitHub Actions: `deploy.yml` (builds and deploys to GitHub Pages) and `promote-release.yml` (force-pushes that tag's commit to the `release` branch).
+- Cloudflare Pages' Git integration watches the `release` branch (not `main`) as its production branch — so `promote-release.yml` landing a push there is what actually triggers a Cloudflare deploy. This is still pure Git-integration, not a CLI/wrangler deploy: the `release` branch is just the ref Cloudflare's dashboard is configured to watch.
+
 ## Hard-won gotchas
 - **Container queries only see what you tell them to.** `container-type: inline-size` tracks width only — sizing driven purely by `cqw` breaks in landscape, where each stacked panel's *height* is the real constraint. Fix: establish `container-type: size` per-panel (not on the outer frame) and clamp with `min(Xcqw, Ycqh)` wherever a size needs to respect both dimensions.
 - **A raw comma inside a Tailwind arbitrary value (`text-[min(10cqw,15cqh)]`) trips up classname parsing.** Move that expression into a real scoped CSS rule instead of fighting the linter.
