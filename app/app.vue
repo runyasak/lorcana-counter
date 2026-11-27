@@ -7,6 +7,7 @@ const MAX_LORE = 99
 const lores = ref<[number, number]>([0, 0])
 const diffs = ref<[number, number]>([0, 0])
 const themeIndices = ref<[number, number]>([0, 1])
+const showResetConfirm = ref(false)
 
 const p1Theme = computed<Theme>(() => THEMES[themeIndices.value[0]] ?? THEMES[0]!)
 const p2Theme = computed<Theme>(() => THEMES[themeIndices.value[1]] ?? THEMES[0]!)
@@ -53,9 +54,17 @@ function change(idx: 0 | 1, amount: number) {
   }
 }
 
-function reset() {
+function requestReset() {
+  if (lores.value[0] === 0 && lores.value[1] === 0) {
+    return
+  }
+  showResetConfirm.value = true
+}
+
+function confirmReset() {
   lores.value = [0, 0]
   diffs.value = [0, 0]
+  showResetConfirm.value = false
 }
 </script>
 
@@ -93,10 +102,18 @@ function reset() {
           borderWidth: '1.5px',
           borderStyle: 'solid',
         }"
-        @click="reset"
+        @click="requestReset"
       >
         Reset
       </button>
+
+      <Transition name="fade">
+        <ResetConfirmModal
+          v-if="showResetConfirm"
+          @confirm="confirmReset"
+          @cancel="showResetConfirm = false"
+        />
+      </Transition>
 
       <!-- Player 1 — normal orientation -->
       <div
@@ -120,3 +137,15 @@ function reset() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
