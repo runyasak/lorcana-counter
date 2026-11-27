@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.0
+
+[compare changes](https://github.com/runyasak/lorcana-counter/compare/v0.0.2...v0.1.0)
+
+### 🚀 Enhancements
+
+- Confirm before resetting scores ([9e49c6c](https://github.com/runyasak/lorcana-counter/commit/9e49c6c))
+
+### ❤️ Contributors
+
+- Runyasak Chaengnaimuang ([@runyasak](https://github.com/runyasak))
+
 ## v0.0.2
 
 [compare changes](https://github.com/runyasak/lorcana-counter/compare/v0.0.1...v0.0.2)
